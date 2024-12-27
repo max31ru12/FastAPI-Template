@@ -15,11 +15,11 @@ docker compose -f ./local.yml run --rm backend alembic upgrade head
 ```
 
 
-## Запустить миграции
+### Создание моделей
 
 Для проведения миграций необходимо выполнить 3 действия:
 
-1. Импортировать модель в `.env.py`:
+1. Импортировать модель в `__init__py` модуля `models`, чтобы alembic видел эту модель и провел миграцию создания модели
 
 2. Создать миграцию:
 
@@ -40,3 +40,8 @@ docker compose -f ./local.yml run --rm backend alembic upgrade head
 
 - http://127.0.0.1:8000/docs - документация API
 - на порту `5432` доступна БД postgres
+
+
+## Links
+
+- [Unique Constraint Naming conventions](https://docs.sqlalchemy.org/en/20/core/constraints.html#constraint-naming-conventions)

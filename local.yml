@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:alpine
     environment:
       - POSTGRES_USER=test
       - POSTGRES_DB=test
@@ -28,13 +28,15 @@ services:
     depends_on:
       - postgres
     environment:
-      - DB_HOST=localhost
-      - DB_PORT=5432
-      - DB_PASSWORD=test
-      - DB_USER=test
-      - DB_NAME=test
+      - DB_HOST=${DB_HOST:-localhost}
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_PASSWORD=${DB_PASSWORD:-test}
+      - DB_USER=${DB_USER:-test}
+      - DB_NAME=${DB_NAME:-test}
+      - DEV_MODE=${DEV_MODE:-true}
     ports:
       - "8000:8000"
+    restart: unless-stopped
     volumes:
       - ./app/:/backend/app/
       - ./alembic/:/backend/alembic
