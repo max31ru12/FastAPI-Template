@@ -44,10 +44,24 @@ jobs:
            sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
            sudo docker run hello-world
-      - name:
+      - name: Run postgres
         run: |
           docker pull postgres:alpine
           docker run -d -e "POSTGRES_USER=test" -e "POSTGRES_PASSWORD=test" -e "POSTGRES_DB=test" -p 5432:5432 postgres:alpine
+
+      - name: Wait for postgres
+        run: |
+          for i in {1..10}; do
+            if docker exec $(docker ps -q -f ancestor=postgres:alpine) pg_isready -U test; then
+              echo "PostgreSQL is ready"
+              exit 0
+            fi
+            echo "Waiting for PostgreSQL..."
+            sleep 5
+          done
+          echo "PostgreSQL failed to start"
+          exit 1
+
       - name: Run tests
         run: |
           pytest
