@@ -13,7 +13,7 @@ DB_USER: str = getenv("DB_USER", default="test")
 DB_NAME: str = getenv("DB_NAME", default="test")
 
 DB_URL: str = (
-    f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@localhost:{DB_PORT}/{DB_NAME}"
+    f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@postgres:{DB_PORT}/{DB_NAME}"
 )
 
 CONVENTION = {

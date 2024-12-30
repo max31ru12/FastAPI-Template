@@ -96,6 +96,19 @@ jobs:
         run: |
           docker compose -f local.yml up -d
 
+      - name: Wait for postgres
+        run: |
+          for i in {1..10}; do
+            if docker exec $(docker ps -q -f ancestor=postgres:alpine) pg_isready -U test; then
+              echo "PostgreSQL is ready"
+              exit 0
+            fi
+            echo "Waiting for PostgreSQL..."
+            sleep 5
+          done
+          echo "PostgreSQL failed to start"
+          exit 1
+
       - name: Run migrations
         run: |
           docker compose -f local.yml run --rm backend alembic upgrade head
