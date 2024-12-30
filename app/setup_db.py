@@ -1,13 +1,15 @@
 from typing import AsyncGenerator
 
+from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
     async_sessionmaker,
     create_async_engine,
 )
+from sqlalchemy.orm import DeclarativeBase
 
-from app.config import DB_URL, DEV_MODE
+from app.config import CONVENTION, DB_URL, DEV_MODE
 
 async_engine: AsyncEngine = create_async_engine(
     url=DB_URL,
@@ -29,3 +31,7 @@ session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(
 async def session_getter() -> AsyncGenerator[AsyncSession, None]:
     async with session_factory() as session:
         yield session
+
+
+class Base(DeclarativeBase):
+    metadata = MetaData(naming_convention=CONVENTION)
