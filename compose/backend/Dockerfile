@@ -7,9 +7,9 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /backend
 
-COPY requirements.txt ./
+COPY requirements-dev.txt ./
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements-dev.txt
 
 COPY ./app ./app
 COPY ./alembic ./
