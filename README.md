@@ -17,17 +17,19 @@ docker compose -f ./local.yml run --rm backend alembic upgrade head
 
 ### Создание моделей
 
-Для проведения миграций необходимо выполнить 3 действия:
+Для проведения миграций необходимо выполнить 4 действия:
 
 1. Импортировать модель в `__init__py` модуля `models`, чтобы alembic видел эту модель и провел миграцию создания модели
 
-2. Создать миграцию:
+2. Создать папку `versions` в  папке `alembic`
+
+3. Создать миграцию:
 
     ```shell
     docker compose -f ./local.yml run --rm backend alembic revision --autogenerate -m "name" --rev-id "001"
     ```
 
-3. Провести миграцию
+4. Провести миграцию
 
     ```shell
     docker compose -f ./local.yml run --rm backend alembic upgrade head
