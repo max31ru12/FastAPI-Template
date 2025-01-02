@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DEV_MODE: bool = getenv("DEV_MODE", "true") == "true"
+DEV_MODE: bool = getenv("DEV_MODE", "true").strip().lower() in {"true", "1", "yes"}
 
 DB_HOST: str = getenv("DB_HOST", default="postgres")
 DB_PORT: str = getenv("DB_PORT", default="5432")
