@@ -3,9 +3,9 @@ services:
     container_name: postgres
     image: postgres:alpine
     environment:
-      - POSTGRES_USER=test
-      - POSTGRES_DB=test
-      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=${DB_USER:-test}
+      - POSTGRES_DB=${DB_NAME:-test}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-test}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -28,7 +28,7 @@ services:
     depends_on:
       - postgres
     environment:
-      - DB_HOST=${DB_HOST:-postgres}
+      - DB_HOST=postgres
       - DB_PORT=${DB_PORT:-5432}
       - DB_PASSWORD=${DB_PASSWORD:-test}
       - DB_USER=${DB_USER:-test}
