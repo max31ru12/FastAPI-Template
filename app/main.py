@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from app.config import DEV_MODE
+from app.core.config import DEV_MODE
 
 
 @asynccontextmanager

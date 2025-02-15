@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "fastapi-template"
+version = "0.1.0"
+description = ""
+authors = ["max31ru12 <maxevg72@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.8"
+sqlalchemy = {extras = ["async"], version = "^2.0.38"}
+alembic = {extras = ["async"], version = "^1.14.1"}
+asyncpg = "^0.30.0"
+pydantic-settings = "^2.7.1"
+uvicorn = "^0.34.0"
+orjson = "^3.10.15"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+ruff = "^0.9.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120  # Устанавливаем максимальную длину строки в 120 символов
+
+[tool.ruff.lint]
+select = [
+    "F",  # flake8 - ошибки переменных (неиспользуемые, неопределенные)
+    "I",  # isort - упорядочевание импортов
+    "E",  # pycodestyle - ошибки форматирования
+    "W",  # pycodestyle - предупреждения о коде
+    "B",  # flake8-bugbear потентциальные баги
+    "C90", #  ьссфиу - сложность кода
+]
+ignore = [
+    "E501", # PEP8 length > 79
+] # ignored rules
+
+[tool.ruff.format]
+quote-style = "double"  # Всегда использовать двойные кавычки
+indent-style = "space"  # Использовать пробелы вместо табов (tab)
+line-ending = "lf"  # Использовать Unix-стиль переносов строк
+
+[tool.ruff.isort]
+known-first-party = ["my_project"]  # Эти настройки сортируют импорты
+combine-as-imports = true

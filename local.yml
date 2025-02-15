@@ -1,6 +1,6 @@
 services:
-  postgres:
-    container_name: postgres
+  database:
+    container_name: database
     image: postgres:alpine
     environment:
       - POSTGRES_USER=${DB_USER:-test}
@@ -20,13 +20,13 @@ services:
       - default
 
 
-  backend:
-    container_name: backend
+  backend-template:
+    container_name: backend-template
     build:
       context: .
       dockerfile: compose/backend/Dockerfile
     depends_on:
-      - postgres
+      - database
     environment:
       - DB_HOST=postgres
       - DB_PORT=${DB_PORT:-5432}
@@ -38,7 +38,7 @@ services:
       - "8000:8000"
     restart: unless-stopped
     volumes:
-      - ./app/:/backend/app/
+      - ./app/:/app/app/
       - ./alembic/:/backend/alembic
     networks:
       - default

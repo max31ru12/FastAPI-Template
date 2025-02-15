@@ -20,7 +20,6 @@ CONVENTION = {
 
 
 class Settings(BaseSettings):
-
     DB_HOST: str = "localhost"
     DB_PORT: str = "5432"
     DB_PASSWORD: str = "test"
