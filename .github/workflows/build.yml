@@ -21,7 +21,7 @@ jobs:
           poetry install --with dev
       - name: Lint with ruff
         run: |
-          - poetry run ruff check .
+           poetry run ruff check .
       - name: Install Docker
         run: |
            sudo apt-get update
