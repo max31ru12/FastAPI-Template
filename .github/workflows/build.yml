@@ -107,4 +107,4 @@ jobs:
 
       - name: Run migrations
         run: |
-          docker compose -f local.yml run --rm app poetry run alembic upgrade head
+          docker compose -f local.yml run --rm backend-template poetry run alembic upgrade head
