@@ -24,13 +24,13 @@ docker compose -f ./local.yml run --rm backend alembic upgrade head
 Полнять БД:
 
 ```shell
-docker compose -f ./local.yml up postgres -d
+docker compose -f ./local.yml up database -d
 ```
 
 Далее создаем виртуальное окружение, устанавливаем зависимости:
 
 ```shell
-pip install -r requirements-dev.txt
+poetry install --dev
 ```
 
 Убеждаемся, что переменная окружения `DB_HOST` имеет значение `localhost`. В `/app/config.py` она имеет такое значение
@@ -48,16 +48,16 @@ pip install -r requirements-dev.txt
 3. Создать миграцию:
 
     ```shell
-    docker compose -f ./local.yml run --rm backend alembic revision --autogenerate -m "name" --rev-id "001"
+    docker compose -f ./local.yml run --rm backend-template poetry run alembic revision --autogenerate -m "name" --rev-id "001"
     ```
 
 4. Провести миграцию
 
     ```shell
-    docker compose -f ./local.yml run --rm backend alembic upgrade head
+    docker compose -f ./local.yml run --rm backend-template poetry run alembic upgrade head
     ```
 
-где  `backend` - это имя сервиса
+где  `backend-template` - это имя сервиса
 
 
 ## Сервисы
