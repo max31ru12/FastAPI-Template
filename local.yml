@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./app/:/app/app/
-      - ./alembic/:/backend/alembic
+      - ./alembic/:/app/alembic
     networks:
       - default
 
