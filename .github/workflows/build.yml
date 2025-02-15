@@ -19,10 +19,9 @@ jobs:
           sudo curl -sSL https://install.python-poetry.org | python3 -
           export PATH="$HOME/.local/bin:$PATH"
           poetry install --with dev
-      - name: Lint with flake8
+      - name: Lint with ruff
         run: |
-          poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          - poetry run ruff check .
       - name: Install Docker
         run: |
            sudo apt-get update
