@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from app.core.setup_db import Base
+from app.core.database.setup_db import Base
 from app.main import app
 
 pytest_plugins = ("anyio",)
