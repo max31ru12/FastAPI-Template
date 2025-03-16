@@ -10,6 +10,6 @@ async def test_database_setup(session: AsyncSession):
     assert result.scalar() == 1
 
 
-def test_client_request(client):
-    response = client.get("/")
+async def test_client_request(client):
+    response = await client.get("/")
     assert response.status_code == 200

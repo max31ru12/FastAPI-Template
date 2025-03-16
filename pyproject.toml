@@ -21,6 +21,7 @@ orjson = "^3.10.15"
 pytest = "^8.3.4"
 ruff = "^0.9.6"
 httpx = "^0.28.1"
+pytest-asyncio = "^0.25.3"
 
 [build-system]
 requires = ["poetry-core"]

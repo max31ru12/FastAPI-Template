@@ -1,7 +1,7 @@
-from typing import AsyncIterator, Iterator
+from typing import AsyncIterator
 
 import pytest
-from fastapi.testclient import TestClient
+from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
@@ -23,9 +23,9 @@ def anyio_backend() -> str:
 
 
 @pytest.fixture(scope="function")
-def client() -> TestClient:
-    with TestClient(app) as _client:
-        yield _client
+async def client() -> AsyncClient:
+    async with AsyncClient(transport=ASGITransport(app), base_url="http://test") as ac:
+        yield ac
 
 
 @pytest.fixture(scope="session")
@@ -39,7 +39,7 @@ def async_session_maker(test_engine) -> async_sessionmaker[AsyncSession]:
 
 
 @pytest.fixture(scope="function")
-async def session(async_session_maker) -> Iterator[AsyncSession]:
+async def session(async_session_maker) -> AsyncSession:
     async with async_session_maker() as session:
         yield session
         # Clear data after single test
